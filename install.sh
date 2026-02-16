@@ -706,13 +706,18 @@ config_after_install() {
             
             ${xui_folder}/x-ui setting -username "${config_username}" -password "${config_password}" -port "${config_port}" -webBasePath "${config_webBasePath}"
             
-            echo ""
-            echo -e "${green}═══════════════════════════════════════════${plain}"
-            echo -e "${green}     SSL Certificate Setup (MANDATORY)     ${plain}"
-            echo -e "${green}═══════════════════════════════════════════${plain}"
-            echo -e "${yellow}For security, SSL certificate is required for all panels.${plain}"
-            echo -e "${yellow}Let's Encrypt now supports both domains and IP addresses!${plain}"
-            echo ""
+            # --- Mandatory SSL Quantum Protocol UI ---
+echo ""
+echo -e "${RED}⚡ // CRITICAL_SECURITY_ENFORCEMENT${PLAIN}"
+echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
+echo -e "${CYAN}┃${PLAIN}  ${BOLD}${RED}🔐 SSL CERTIFICATE DEPLOYMENT (MANDATORY)${PLAIN}       ${CYAN}┃${PLAIN}"
+echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
+echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
+echo -e "${CYAN}┃${PLAIN}  ${YELLOW}⚠ ALERT:${PLAIN} ${WHITE}Security protocol requires SSL for all panels.${PLAIN} ${CYAN}┃${PLAIN}"
+echo -e "${CYAN}┃${PLAIN}  ${GREEN}✦ INFO :${PLAIN} ${WHITE}Let's Encrypt supports DOMAIN & IP!${PLAIN}       ${CYAN}┃${PLAIN}"
+echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
+echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
+echo ""
 
             prompt_and_setup_ssl "${config_port}" "${config_webBasePath}" "${server_ip}"
             
