@@ -706,61 +706,41 @@ config_after_install() {
             
             ${xui_folder}/x-ui setting -username "${config_username}" -password "${config_password}" -port "${config_port}" -webBasePath "${config_webBasePath}"
             
-            # --- Mandatory SSL Quantum Protocol UI ---
             echo ""
-            echo -e "${RED}⚡ // CRITICAL_SECURITY_ENFORCEMENT${PLAIN}"
+            echo -e "${RED}⚡ // SECURITY_PROTOCOL_ENFORCEMENT_REQUIRED${PLAIN}"
             echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
             echo -e "${CYAN}┃${PLAIN}  ${BOLD}${RED}🔐 SSL CERTIFICATE DEPLOYMENT (MANDATORY)${PLAIN}       ${CYAN}┃${PLAIN}"
             echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
             echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}┃${PLAIN}  ${YELLOW}⚠ ALERT:${PLAIN} ${WHITE}Security protocol requires SSL for all panels.${PLAIN} ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}┃${PLAIN}  ${GREEN}✦ INFO :${PLAIN} ${WHITE}Let's Encrypt supports DOMAIN & IP!${PLAIN}       ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
+            echo -e "${CYAN}┃${PLAIN}  ${RED}✖ WARNING:${PLAIN} ${WHITE}PANEL ACCESS REQUIRES ENCRYPTION!${PLAIN}     ${CYAN}┃${PLAIN}"
+            echo -e "${CYAN}
             echo ""
 
             prompt_and_setup_ssl "${config_port}" "${config_webBasePath}" "${server_ip}"
             
             # Display final credentials and access information
-            # --- 1. Cloudflare DNS/SSL Header ---
-           echo -e "${CYAN}📡 // NEURAL_GATEWAY_INITIALIZING...${PLAIN}"
-           echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
-           echo -e "${CYAN}┃${PLAIN}  ${BOLD}${PURPLE}🌐 CLOUDFLARE QUANTUM SYNC (DNS/SSL)${PLAIN}             ${CYAN}┃${PLAIN}"
-           echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
-           echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-           echo -e "${CYAN}┃${PLAIN}  ${BLUE}● API_ENDPOINT  :${PLAIN} ${WHITE}Cloudflare v4 API${PLAIN}            ${CYAN}┃${PLAIN}"
-           echo -e "${CYAN}┃${PLAIN}  ${BLUE}● PROTECTION    :${PLAIN} ${WHITE}Full-Strict Encryption${PLAIN}       ${CYAN}┃${PLAIN}"
-           echo -e "${CYAN}┃${PLAIN}  ${BLUE}● SYNC_MODE     :${PLAIN} ${WHITE}Automated Neural Handshake${PLAIN}   ${CYAN}┃${PLAIN}"
-           echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-           echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
-           echo ""
-
-# --- 2. Input Prompts (Futuristic Style) ---
-           echo -e "${CYAN}┌───[ ${BOLD}${YELLOW}INPUT REQUIRED${PLAIN}${CYAN} ]${PLAIN}"
-           echo -n -e "${CYAN}├──╼ ${WHITE}ENTER DOMAIN (e.g. example.com): ${PLAIN}"
-           read -r domain
-           echo -n -e "${CYAN}├──╼ ${WHITE}ENTER CLOUDFLARE EMAIL: ${PLAIN}"
-           read -r email
-           echo -n -e "${CYAN}└──╼ ${WHITE}ENTER GLOBAL API KEY: ${PLAIN}"
-           read -s api_key
-           echo -e "\n"
-
-# --- 3. Processing Animation (စာသားလေးတွေ ပြေးနေအောင်) ---
-           echo -e "${YELLOW}⚡ SYNCING WITH CLOUDFLARE NODES...${PLAIN}"
-           sleep 1
-           echo -e "${BLUE}🛰️  PUSHING DNS RECORDS... [ DONE ]${PLAIN}"
-           sleep 0.5
-           echo -e "${BLUE}🛡️  CONFIGURING SSL CERTS... [ DONE ]${PLAIN}"
-           sleep 1
-
-# --- 4. Final Success Panel ---
-          echo -e ""
-          echo -e "${GREEN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
-          echo -e "${GREEN}┃        ✨ CLOUDFLARE SYNC COMPLETED !              ┃${PLAIN}"
-          echo -e "${GREEN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
-          echo -e "  ${CYAN}DOMAIN      :${PLAIN} ${BOLD}${YELLOW}${domain}${PLAIN}"
-          echo -e "  ${CYAN}SSL STATUS  :${PLAIN} ${BOLD}${GREEN}ACTIVE (ENCRYPTED)${PLAIN}"
-          echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
+            echo ""
+            # --- Future Quantum Success Dashboard ---
+            clear
+            echo -e "${GREEN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
+            echo -e "${GREEN}┃${PLAIN}  ${BOLD}${GREEN}🚀 NEURAL LINK ESTABLISHED: DEPLOYMENT SUCCESS!${PLAIN}     ${GREEN}┃${PLAIN}"
+            echo -e "${GREEN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
+            echo ""
+            echo -e "  ${CYAN}TERMINAL ACCESS GRANTED // CORE_SYSTEM_READY${PLAIN}"
+            echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
+            echo -e "  ${BLUE}🔹 USERNAME    :${PLAIN} ${BOLD}${YELLOW}${config_username}${PLAIN}"
+            echo -e "  ${BLUE}🔹 PASSWORD    :${PLAIN} ${BOLD}${YELLOW}${config_password}${PLAIN}"
+            echo -e "  ${BLUE}🔹 ACCESS PORT :${PLAIN} ${BOLD}${YELLOW}${config_port}${PLAIN}"
+            echo -e "  ${BLUE}🔹 WEB PATH    :${PLAIN} ${BOLD}${YELLOW}/${config_webBasePath}${PLAIN}"
+            echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
+            echo ""
+            echo -e "  ${BOLD}${PURPLE}🌐 SECURE ACCESS URL:${PLAIN}"
+            echo -e "  ${BOLD}${BLUE}https://${SSL_HOST}:${config_port}/${config_webBasePath}${PLAIN}"
+            echo ""
+            echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
+            echo -e "  ${RED}⚠️  CRITICAL:${PLAIN} ${WHITE}SAVE THESE CREDENTIALS SECURELY!${PLAIN}"
+            echo -e "  ${GREEN}🛡️  SECURITY:${PLAIN} ${WHITE}SSL CERTIFICATE ACTIVE & ENFORCED${PLAIN}"
+            echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
         else
             local config_webBasePath=$(gen_random_string 18)
             echo -e "${yellow}WebBasePath is missing or too short. Generating a new one...${plain}"
@@ -769,17 +749,19 @@ config_after_install() {
 
             # If the panel is already installed but no certificate is configured, prompt for SSL now
             if [[ -z "${existing_cert}" ]]; then
-                # --- SSL Quantum Re-Design ---
-            echo ""
-            echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${plain}"
-            echo -e "${CYAN}┃${plain}  ${BOLD}${PURPLE}🛡️  SSL CRYPTO-SHIELD DEPLOYMENT${plain}                 ${CYAN}┃${plain}"
-            echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
-            echo -e "${CYAN}┃${plain}                                                      ${CYAN}┃${plain}"
-            echo -e "${CYAN}┃${plain}  ${GREEN}✦ RECOMMENDED:${plain} ${WHITE}ENHANCED SECURITY PROTOCOL${plain}        ${CYAN}┃${plain}"
-            echo -e "${CYAN}┃${plain}  ${YELLOW}✦ INFO:${plain} ${WHITE}Let's Encrypt supports DOMAIN & IP!${plain}       ${CYAN}┃${plain}"
-            echo -e "${CYAN}┃${plain}                                                      ${CYAN}┃${plain}"
-            echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${plain}"
-            echo ""
+                echo ""
+                # --- SSL Quantum Shield UI ---
+                echo -e "${CYAN}📡 // INITIALIZING_SECURITY_HANDSHAKE...${PLAIN}"
+                echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
+                echo -e "${CYAN}┃${PLAIN}  ${BOLD}${PURPLE}🛡️  SSL CRYPTO-SHIELD DEPLOYMENT${PLAIN}                 ${CYAN}┃${PLAIN}"
+                echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
+                echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
+                echo -e "${CYAN}┃${PLAIN}  ${GREEN}✦ RECOMMENDED :${PLAIN} ${WHITE}ENHANCED MATRIX PROTECTION${PLAIN}    ${CYAN}┃${PLAIN}"
+                echo -e "${CYAN}┃${PLAIN}  ${YELLOW}✦ INFO        :${PLAIN} ${WHITE}SUPPORTED: DOMAIN & IP ADDR${PLAIN}   ${CYAN}┃${PLAIN}"
+                echo -e "${CYAN}┃${PLAIN}  ${BLUE}✦ AUTHORITY   :${PLAIN} ${WHITE}LET'S ENCRYPT CA${PLAIN}              ${CYAN}┃${PLAIN}"
+                echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
+                echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
+                echo ""
                 prompt_and_setup_ssl "${existing_port}" "${config_webBasePath}" "${server_ip}"
                 echo -e "${green}Access URL:  https://${SSL_HOST}:${existing_port}/${config_webBasePath}${plain}"
             else
@@ -792,24 +774,13 @@ config_after_install() {
             local config_username=$(gen_random_string 10)
             local config_password=$(gen_random_string 10)
             
-            # --- Future Security Update UI Design ---
-        echo -e "${RED}${BOLD}        ⚠️  [ALERT] SECURITY VULNERABILITY DETECTED${PLAIN}"
-        echo -e "${YELLOW}Default credentials found. Initializing Neural encryption...${PLAIN}"
-        echo ""
-
-# Apply settings
-        ${xui_folder}/x-ui setting -username "${config_username}" -password "${config_password}"
-
-        echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
-        echo -e "${CYAN}┃${PLAIN}  ${BOLD}${PURPLE}🔑 NEW ENCRYPTED ACCESS KEYS GENERATED${PLAIN}          ${CYAN}┃${PLAIN}"
-        echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
-        echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-        echo -e "${CYAN}┃${PLAIN}  ${CYAN}● USERNAME :${PLAIN} ${BOLD}${YELLOW}${config_username}${PLAIN}                      ${CYAN}┃${PLAIN}"
-        echo -e "${CYAN}┃${PLAIN}  ${CYAN}● PASSWORD :${PLAIN} ${BOLD}${YELLOW}${config_password}${PLAIN}              ${CYAN}┃${PLAIN}"
-        echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-        echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
-        echo -e "${CYAN}┃${PLAIN}  ${GREEN}✔️ STATUS: DATABASE SECURED & UPDATED${PLAIN}              ${CYAN}┃${PLAIN}"
-        echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
+            echo -e "${yellow}Default credentials detected. Security update required...${plain}"
+            ${xui_folder}/x-ui setting -username "${config_username}" -password "${config_password}"
+            echo -e "Generated new random login credentials:"
+            echo -e "###############################################"
+            echo -e "${green}Username: ${config_username}${plain}"
+            echo -e "${green}Password: ${config_password}${plain}"
+            echo -e "###############################################"
         else
             echo -e "${green}Username, Password, and WebBasePath are properly set.${plain}"
         fi
@@ -818,28 +789,18 @@ config_after_install() {
         # Properly detect empty cert by checking if cert: line exists and has content after it
         existing_cert=$(${xui_folder}/x-ui setting -getCert true | grep 'cert:' | awk -F': ' '{print $2}' | tr -d '[:space:]')
         if [[ -z "$existing_cert" ]]; then
-            # --- Future SSL Setup UI Design ---
-        echo ""
-        echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
-        echo -e "${CYAN}┃${PLAIN}  ${BOLD}${PURPLE}🛡️  SSL CRYPTO-SHIELD ESTABLISHMENT${PLAIN}              ${CYAN}┃${PLAIN}"
-        echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
-        echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-        echo -e "${CYAN}┃${PLAIN}  ${GREEN}✔️ STATUS:${PLAIN} ${WHITE}READY FOR DEPLOYMENT (RECOMMENDED)${PLAIN}      ${CYAN}┃${PLAIN}"
-        echo -e "${CYAN}┃${PLAIN}  ${YELLOW}⚡️ INFO:${PLAIN}   ${WHITE}Let's Encrypt supports DOMAIN & IP!${PLAIN}     ${CYAN}┃${PLAIN}"
-        echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-        echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
-        echo ""
-
-# SSL Setup Function ကို ခေါ်ယူခြင်း
-            prompt_and_setup_ssl "${existing_port}" "${existing_webBasePath}" "${server_ip}"
-
             echo ""
-            echo -e "${CYAN}📡 // NEURAL_LINK_ESTABLISHED${PLAIN}"
-            echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
-            echo -e "  ${BOLD}${GREEN}✔️ SECURE ACCESS URL:${PLAIN}"
-            echo -e "  ${BOLD}${BLUE}https://${SSL_HOST}:${existing_port}/${existing_webBasePath}${PLAIN}"
-            echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
-            echo ""
+            echo -e "${CYAN}📡 // NEURAL_SECURITY_PROTOCOL_DETECTION...${PLAIN}"
+            echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
+            echo -e "${CYAN}┃${PLAIN}  ${BOLD}${PURPLE}🛡️  SSL CRYPTO-SHIELD DEPLOYMENT${PLAIN}                 ${CYAN}┃${PLAIN}"
+            echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
+            echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
+            echo -e "${CYAN}┃${PLAIN}  ${GREEN}✦ STATUS      :${PLAIN} ${WHITE}ENCRYPTION RECOMMENDED${PLAIN}        ${CYAN}┃${PLAIN}"
+            echo -e "${CYAN}┃${PLAIN}  ${BLUE}✦ PROTECTION  :${PLAIN} ${WHITE}End-to-End Neural Tunneling${PLAIN}   ${CYAN}┃${PLAIN}"
+            echo -e "${CYAN}┃${PLAIN}  ${YELLOW}✦ VALIDATION  :${PLAIN} ${WHITE}Multi-Domain & IP Support${PLAIN}     ${CYAN}┃${PLAIN}"
+            echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
+            echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
+            echo -e "${yellow}Let's Encrypt now supports both domains and IP addresses!${plain}"
             echo ""
             prompt_and_setup_ssl "${existing_port}" "${existing_webBasePath}" "${server_ip}"
             echo -e "${green}Access URL:  https://${SSL_HOST}:${existing_port}/${existing_webBasePath}${plain}"
@@ -1030,32 +991,28 @@ install_x-ui() {
     
     echo -e "${green}x-ui ${tag_version}${plain} installation finished, it is running now..."
     echo -e ""
-    echo -e "${CYAN}🚀 // FUTURE_OF_SCRIPT 🔒${PLAIN}"
-    echo -e "${PURPLE}${BOLD}   3X-UI QUANTUM MANAGEMENT INTERFACE${PLAIN}"
-    echo -e "${CYAN}░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░${PLAIN}"
-    echo -e ""
-    echo -e "${YELLOW}${BOLD}  [🔒] SELECT OPERATION MODE${PLAIN}"
-    echo -e "  ${CYAN}1.${PLAIN} ${BLUE}CORE AUTHENTICATION${PLAIN}      ${CYAN}5.${PLAIN} ${BLUE}PORT RECONFIGURATION${PLAIN}"
-    echo -e "  ${CYAN}2.${PLAIN} ${BLUE}NEURAL KEY SYNC${PLAIN}          ${CYAN}6.${PLAIN} ${BLUE}CREDENTIAL TERMINAL${PLAIN}"
-    echo -e ""
-    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
-    echo -e "${YELLOW}${BOLD}                // MAIN INTERFACE MENU${PLAIN}"
+    # --- Future Neural Subcommands UI ---
+    echo -e "${CYAN}📡 // NEURAL_COMMAND_CENTER_INITIALIZED${PLAIN}"
     echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${GREEN}✔️ INSTALLED_MODULES${PLAIN}                                ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BOLD}${GREEN}⚡ 3X-UI CONTROL INTERFACE (SUBCOMMANDS)${PLAIN}         ${CYAN}┃${PLAIN}"
     echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${PURPLE}01.${PLAIN} ${WHITE}INSTALL CORE TANK${PLAIN}      ${PURPLE}08.${PLAIN} ${WHITE}RESTART NEURAL${PLAIN}  ${CYAN}┃${plain}"
-    echo -e "${CYAN}┃${PLAIN}  ${PURPLE}02.${PLAIN} ${WHITE}UPDATE MATRIX${PLAIN}          ${PURPLE}09.${PLAIN} ${WHITE}PORT MAPPING${PLAIN}    ${CYAN}┃${plain}"
-    echo -e "${CYAN}┃${PLAIN}  ${PURPLE}03.${PLAIN} ${WHITE}NETWORK SERVICES${PLAIN}       ${PURPLE}10.${PLAIN} ${WHITE}VIEW SETTINGS${PLAIN}   ${CYAN}┃${plain}"
-    echo -e "${CYAN}┃${PLAIN}  ${PURPLE}04.${PLAIN} ${WHITE}AUTHENTICATION COMPLETE${PLAIN} ${PURPLE}15.${PLAIN} ${WHITE}LOGS ANALYSIS${PLAIN}   ${CYAN}┃${plain}"
-    echo -e "${CYAN}┃${PLAIN}  ${PURPLE}05.${PLAIN} ${WHITE}CONFIG DATA_INFO${PLAIN}       ${PURPLE}19.${PLAIN} ${WHITE}DNS/SSL CRYPTO${PLAIN}  ${CYAN}┃${plain}"
-    echo -e "${CYAN}┃${PLAIN}  ${PURPLE}06.${PLAIN} ${WHITE}RESET CREDENTIALS${PLAIN}      ${PURPLE}25.${PLAIN} ${WHITE}SPEEDTEST_PRO${PLAIN}   ${CYAN}┃${plain}"
-    echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${plain}"
-    echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${plain}"
-    echo -e ""
-    echo -e "${CYAN}⚡️ // MAIN_PROGRAM_LOOP${PLAIN}"
-    echo -e "  ${PURPLE}●${PLAIN} ${WHITE}INSTALL X-UI [${GREEN}SENSING${WHITE}]${PLAIN}      ${RED}● EXIT_SYSTEM${PLAIN}"
-    echo -e ""
-echo -e "${CYAN}
+    echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui${plain}          ${WHITE}▸ Admin Terminal Script${plain}         ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui start${plain}    ${WHITE}▸ Boot Service${plain}                  ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui stop${plain}     ${WHITE}▸ Terminate Service${plain}             ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui restart${plain}  ${WHITE}▸ Reboot Neural Nodes${plain}           ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui status${plain}   ${WHITE}▸ Check System Integrity${plain}        ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui settings${plain} ${WHITE}▸ View Config Data${plain}              ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui enable${plain}   ${WHITE}▸ Set Auto-Initialize${plain}           ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui disable${plain}  ${WHITE}▸ Disable Auto-Initialize${plain}        ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui log${plain}      ${WHITE}▸ Stream Access Logs${plain}            ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui banlog${plain}   ${WHITE}▸ View Intrusion Logs${plain}           ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui update${plain}   ${WHITE}▸ Upgrade Matrix Version${plain}        ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui legacy${plain}   ${WHITE}▸ Load Archive Version${plain}          ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui install${plain}  ${WHITE}▸ Core Installation${plain}             ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui uninstall${plain}${WHITE}▸ Purge System Files${plain}            ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
+    echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
 }
 
 echo -e "${green}Running...${plain}"
