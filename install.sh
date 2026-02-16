@@ -1,4 +1,4 @@
-#!/bin/bash
+    #!/bin/bash
 
 red='\033[0;31m'
 green='\033[0;32m'
@@ -767,17 +767,27 @@ config_after_install() {
             
             echo -e "${yellow}Default credentials detected. Security update required...${plain}"
             ${xui_folder}/x-ui setting -username "${config_username}" -password "${config_password}"
-            echo -e "${green}═══════════════════════════════════════════${plain}"
-            echo -e "${green}     Panel Installation Complete!         ${plain}"
-            echo -e "${green}═══════════════════════════════════════════${plain}"
-            echo -e "${green}Username:    ${config_username}${plain}"
-            echo -e "${green}Password:    ${config_password}${plain}"
-            echo -e "${green}Port:        ${config_port}${plain}"
-            echo -e "${green}WebBasePath: ${config_webBasePath}${plain}"
-            echo -e "${green}Access URL:  https://${SSL_HOST}:${config_port}/${config_webBasePath}${plain}"
-            echo -e "${green}═══════════════════════════════════════════${plain}"
-            echo -e "${yellow}⚠️ IMPORTANT: Save these credentials securely!${plain}"
-            echo -e "${yellow}⚠️ SSL Certificate: Enabled and configured${plain}"
+           # --- Future Quantum Success Dashboard ---
+            clear
+            echo -e "${GREEN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
+            echo -e "${GREEN}┃${PLAIN}  ${BOLD}${GREEN}🚀 NEURAL LINK ESTABLISHED: DEPLOYMENT SUCCESS!${PLAIN}     ${GREEN}┃${PLAIN}"
+            echo -e "${GREEN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
+            echo ""
+            echo -e "  ${CYAN}TERMINAL ACCESS GRANTED // CORE_SYSTEM_READY${PLAIN}"
+            echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
+            echo -e "  ${BLUE}🔹 USERNAME    :${PLAIN} ${BOLD}${YELLOW}${config_username}${PLAIN}"
+            echo -e "  ${BLUE}🔹 PASSWORD    :${PLAIN} ${BOLD}${YELLOW}${config_password}${PLAIN}"
+            echo -e "  ${BLUE}🔹 ACCESS PORT :${PLAIN} ${BOLD}${YELLOW}${config_port}${PLAIN}"
+            echo -e "  ${BLUE}🔹 WEB PATH    :${PLAIN} ${BOLD}${YELLOW}/${config_webBasePath}${PLAIN}"
+            echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
+            echo ""
+            echo -e "  ${BOLD}${PURPLE}🌐 SECURE ACCESS URL:${PLAIN}"
+            echo -e "  ${BOLD}${BLUE}https://${SSL_HOST}:${config_port}/${config_webBasePath}${PLAIN}"
+            echo ""
+            echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
+            echo -e "  ${RED}⚠️  CRITICAL:${PLAIN} ${WHITE}SAVE THESE CREDENTIALS SECURELY!${PLAIN}"
+            echo -e "  ${GREEN}🛡️  SECURITY:${PLAIN} ${WHITE}SSL CERTIFICATE ACTIVE & ENFORCED${PLAIN}"
+            echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
         else
             echo -e "${green}Username, Password, and WebBasePath are properly set.${plain}"
         fi
