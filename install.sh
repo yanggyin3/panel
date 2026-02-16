@@ -35,58 +35,7 @@ sleep 1
 # --- Password Lock ပြီးဆုံးခြင်း ---
 #!/bin/bash
 
-# --- Colors ---
-cyan='\033[0;36m'
-green='\033[0;32m'
-blue='\033[0;34m'
-yellow='\033[0;33m'
-red='\033[0;31m'
-purple='\033[0;35m'
-plain='\033[0m'
-bold='\033[1m'
 
-# --- Variables ---
-IP=$(curl -s https://api.ipify.org)
-REGION=$(curl -s ipapi.co/$IP/country_name/)
-CITY=$(curl -s ipapi.co/$IP/city/)
-ISP=$(curl -s ipapi.co/$IP/org/)
-OS=$(cat /etc/os-release | grep -w "PRETTY_NAME" | cut -d '"' -f2)
-UPTIME=$(uptime -p)
-RAM_USAGE=$(free -m | awk 'NR==2{printf "%s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }')
-CPU_LOAD=$(top -bn1 | grep "load average:" | awk '{print $10 $11 $12}')
-
-clear
-echo -e "${cyan}📡 // INITIALIZING NEURAL DIAGNOSTICS...${plain}"
-sleep 1
-
-echo -e "${cyan}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${plain}"
-echo -e "${cyan}┃${plain}  ${bold}${purple}🖥️  VIRTUAL PRIVATE SERVER - MATRIX STATUS${plain}             ${cyan}┃${plain}"
-echo -e "${cyan}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
-echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔹 NETWORK IP   :${plain} ${bold}${yellow}$IP${plain}                             ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔹 ISP / ORG    :${plain} ${white}$ISP${plain}                            ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔹 LOCATION     :${plain} ${white}$CITY, $REGION${plain}                      ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
-echo -e "${cyan}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔸 OS RELEASE   :${plain} ${white}$OS${plain}                          ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔸 SYS UPTIME   :${plain} ${white}$UPTIME${plain}                          ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔸 RAM USAGE    :${plain} ${white}$RAM_USAGE${plain}                        ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔸 CPU LOAD     :${plain} ${white}$CPU_LOAD${plain}                           ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
-echo -e "${cyan}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${plain}"
-
-echo -e "\n${yellow}⚡ TESTING NETWORK VELOCITY...${plain}"
-# Speedtest logic (Requires speedtest-cli or a simple curl test)
-# အမြန်ဆုံး speed test ရဖို့ curl နဲ့ပဲ test လုပ်ပြထားပါတယ်
-DOWNLOAD_SPEED=$(curl -s -o /dev/null -w "%{speed_download}\n" http://speedtest.tele2.net/10MB.zip | awk '{printf "%.2f Mbps\n", $1/125000}')
-
-echo -e "${green}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${plain}"
-echo -e "${green}┃${plain}  ${bold}🚀 SPEEDTEST RESULTS${plain}                                ${green}┃${plain}"
-echo -e "${green}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
-echo -e "${green}┃${plain}  ${white}DOWNLOAD VELOCITY :${plain} ${bold}${cyan}$DOWNLOAD_SPEED${plain}                 ${green}┃${plain}"
-echo -e "${green}┃${plain}  ${white}LATENCY STATUS    :${plain} ${bold}${green}OPTIMIZED${plain}                      ${green}┃${plain}"
-echo -e "${green}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${plain}"
-echo ""
 #!/bin/bash
 
 red='\033[0;31m'
@@ -1093,7 +1042,48 @@ install_x-ui() {
     echo -e "${PURPLE}  [!] ACCESS_TOKEN: GRANTED  [!] READY_FOR_COMMAND_INPUT...${PLAIN}"
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
 }
+# --- Variables ---
+IP=$(curl -s https://api.ipify.org)
+REGION=$(curl -s ipapi.co/$IP/country_name/)
+CITY=$(curl -s ipapi.co/$IP/city/)
+ISP=$(curl -s ipapi.co/$IP/org/)
+OS=$(cat /etc/os-release | grep -w "PRETTY_NAME" | cut -d '"' -f2)
+UPTIME=$(uptime -p)
+RAM_USAGE=$(free -m | awk 'NR==2{printf "%s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }')
+CPU_LOAD=$(top -bn1 | grep "load average:" | awk '{print $10 $11 $12}')
 
+clear
+echo -e "${cyan}📡 // INITIALIZING NEURAL DIAGNOSTICS...${plain}"
+sleep 1
+
+echo -e "${cyan}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${plain}"
+echo -e "${cyan}┃${plain}  ${bold}${purple}🖥️  VIRTUAL PRIVATE SERVER - MATRIX STATUS${plain}             ${cyan}┃${plain}"
+echo -e "${cyan}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
+echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔹 NETWORK IP   :${plain} ${bold}${yellow}$IP${plain}                             ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔹 ISP / ORG    :${plain} ${white}$ISP${plain}                            ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔹 LOCATION     :${plain} ${white}$CITY, $REGION${plain}                      ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
+echo -e "${cyan}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔸 OS RELEASE   :${plain} ${white}$OS${plain}                          ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔸 SYS UPTIME   :${plain} ${white}$UPTIME${plain}                          ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔸 RAM USAGE    :${plain} ${white}$RAM_USAGE${plain}                        ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔸 CPU LOAD     :${plain} ${white}$CPU_LOAD${plain}                           ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
+echo -e "${cyan}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${plain}"
+
+echo -e "\n${yellow}⚡ TESTING NETWORK VELOCITY...${plain}"
+# Speedtest logic (Requires speedtest-cli or a simple curl test)
+# အမြန်ဆုံး speed test ရဖို့ curl နဲ့ပဲ test လုပ်ပြထားပါတယ်
+DOWNLOAD_SPEED=$(curl -s -o /dev/null -w "%{speed_download}\n" http://speedtest.tele2.net/10MB.zip | awk '{printf "%.2f Mbps\n", $1/125000}')
+
+echo -e "${green}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${plain}"
+echo -e "${green}┃${plain}  ${bold}🚀 SPEEDTEST RESULTS${plain}                                ${green}┃${plain}"
+echo -e "${green}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
+echo -e "${green}┃${plain}  ${white}DOWNLOAD VELOCITY :${plain} ${bold}${cyan}$DOWNLOAD_SPEED${plain}                 ${green}┃${plain}"
+echo -e "${green}┃${plain}  ${white}LATENCY STATUS    :${plain} ${bold}${green}OPTIMIZED${plain}                      ${green}┃${plain}"
+echo -e "${green}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${plain}"
+echo ""
 echo -e "${green}Running...${plain}"
 install_base
 install_x-ui $1
