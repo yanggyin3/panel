@@ -1042,48 +1042,39 @@ install_x-ui() {
     echo -e "${PURPLE}  [!] ACCESS_TOKEN: GRANTED  [!] READY_FOR_COMMAND_INPUT...${PLAIN}"
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
 }
-# --- Variables ---
+#!/bin/bash
+
+# --- Colors ---
+
+# --- Advanced Variables ---
 IP=$(curl -s https://api.ipify.org)
 REGION=$(curl -s ipapi.co/$IP/country_name/)
 CITY=$(curl -s ipapi.co/$IP/city/)
 ISP=$(curl -s ipapi.co/$IP/org/)
 OS=$(cat /etc/os-release | grep -w "PRETTY_NAME" | cut -d '"' -f2)
-UPTIME=$(uptime -p)
-RAM_USAGE=$(free -m | awk 'NR==2{printf "%s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }')
-CPU_LOAD=$(top -bn1 | grep "load average:" | awk '{print $10 $11 $12}')
+UPTIME=$(uptime -p | sed 's/up //')
+RAM_TOTAL=$(free -m | awk '/Mem:/ {print $2}')
+RAM_USED=$(free -m | awk '/Mem:/ {print $3}')
+RAM_PERCENT=$(awk "BEGIN {printf \"%.2f\", $RAM_USED*100/$RAM_TOTAL}")
+CPU_MODEL=$(lscpu | grep "Model name" | cut -d ':' -f2 | sed 's/^[ \t]*//')
+CPU_CORES=$(nproc)
+DISK_USAGE=$(df -h / | awk 'NR==2 {print $3 "/" $2 " (" $5 ")"}')
+VIRTUAL=$(systemd-detect-virt)
 
 clear
-echo -e "${cyan}📡 // INITIALIZING NEURAL DIAGNOSTICS...${plain}"
+echo -e "${cyan}📡 // SCANNING SYSTEM ARCHITECTURE...${plain}"
 sleep 1
 
 echo -e "${cyan}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${plain}"
-echo -e "${cyan}┃${plain}  ${bold}${purple}🖥️  VIRTUAL PRIVATE SERVER - MATRIX STATUS${plain}             ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${bold}${purple}🖥️  ULTIMATE VPS NEURAL DASHBOARD${plain}                     ${cyan}┃${plain}"
 echo -e "${cyan}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
+echo -e "${cyan}┃${plain}  ${bold}${white}[ NETWORK IDENTITY ]${plain}                                   ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}▸ IP ADDRESS  :${plain} ${bold}${yellow}$IP${plain}"
+echo -e "${cyan}┃${plain}  ${blue}▸ PROVIDER    :${plain} ${white}$ISP${plain}"
+echo -e "${cyan}┃${plain}  ${blue}▸ GEO_LOC     :${plain} ${white}$CITY, $REGION${plain}"
 echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔹 NETWORK IP   :${plain} ${bold}${yellow}$IP${plain}                             ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔹 ISP / ORG    :${plain} ${white}$ISP${plain}                            ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔹 LOCATION     :${plain} ${white}$CITY, $REGION${plain}                      ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
-echo -e "${cyan}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔸 OS RELEASE   :${plain} ${white}$OS${plain}                          ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔸 SYS UPTIME   :${plain} ${white}$UPTIME${plain}                          ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔸 RAM USAGE    :${plain} ${white}$RAM_USAGE${plain}                        ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}🔸 CPU LOAD     :${plain} ${white}$CPU_LOAD${plain}                           ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
-echo -e "${cyan}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${plain}"
-
-echo -e "\n${yellow}⚡ TESTING NETWORK VELOCITY...${plain}"
-# Speedtest logic (Requires speedtest-cli or a simple curl test)
-# အမြန်ဆုံး speed test ရဖို့ curl နဲ့ပဲ test လုပ်ပြထားပါတယ်
-DOWNLOAD_SPEED=$(curl -s -o /dev/null -w "%{speed_download}\n" http://speedtest.tele2.net/10MB.zip | awk '{printf "%.2f Mbps\n", $1/125000}')
-
-echo -e "${green}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${plain}"
-echo -e "${green}┃${plain}  ${bold}🚀 SPEEDTEST RESULTS${plain}                                ${green}┃${plain}"
-echo -e "${green}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
-echo -e "${green}┃${plain}  ${white}DOWNLOAD VELOCITY :${plain} ${bold}${cyan}$DOWNLOAD_SPEED${plain}                 ${green}┃${plain}"
-echo -e "${green}┃${plain}  ${white}LATENCY STATUS    :${plain} ${bold}${green}OPTIMIZED${plain}                      ${green}┃${plain}"
-echo -e "${green}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${plain}"
-echo ""
+echo -e "${cyan}┃${plain}  ${bold}${white}[ CORE SPECIFICATIONS ]${plain}                                ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain
 echo -e "${green}Running...${plain}"
 install_base
 install_x-ui $1
