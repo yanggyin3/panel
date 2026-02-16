@@ -34,6 +34,16 @@ echo -e "${blue}==================================================${plain}"
 sleep 1
 # --- Password Lock ပြီးဆုံးခြင်း ---
 
+#!/bin/bash
+
+red='\033[0;31m'
+green='\033[0;32m'
+blue='\033[0;34m'
+yellow='\033[0;33m'
+plain='\033[0m'
+
+cur_dir=$(pwd)
+
 xui_folder="${XUI_MAIN_FOLDER:=/usr/local/x-ui}"
 xui_service="${XUI_SERVICE:=/etc/systemd/system}"
 
@@ -707,40 +717,28 @@ config_after_install() {
             ${xui_folder}/x-ui setting -username "${config_username}" -password "${config_password}" -port "${config_port}" -webBasePath "${config_webBasePath}"
             
             echo ""
-            echo -e "${RED}⚡ // SECURITY_PROTOCOL_ENFORCEMENT_REQUIRED${PLAIN}"
-            echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
-            echo -e "${CYAN}┃${PLAIN}  ${BOLD}${RED}🔐 SSL CERTIFICATE DEPLOYMENT (MANDATORY)${PLAIN}       ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
-            echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}┃${PLAIN}  ${RED}✖ WARNING:${PLAIN} ${WHITE}PANEL ACCESS REQUIRES ENCRYPTION!${PLAIN}     ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}
+            echo -e "${green}═══════════════════════════════════════════${plain}"
+            echo -e "${green}     SSL Certificate Setup (MANDATORY)     ${plain}"
+            echo -e "${green}═══════════════════════════════════════════${plain}"
+            echo -e "${yellow}For security, SSL certificate is required for all panels.${plain}"
+            echo -e "${yellow}Let's Encrypt now supports both domains and IP addresses!${plain}"
             echo ""
 
             prompt_and_setup_ssl "${config_port}" "${config_webBasePath}" "${server_ip}"
             
             # Display final credentials and access information
             echo ""
-            # --- Future Quantum Success Dashboard ---
-            clear
-            echo -e "${GREEN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
-            echo -e "${GREEN}┃${PLAIN}  ${BOLD}${GREEN}🚀 NEURAL LINK ESTABLISHED: DEPLOYMENT SUCCESS!${PLAIN}     ${GREEN}┃${PLAIN}"
-            echo -e "${GREEN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
-            echo ""
-            echo -e "  ${CYAN}TERMINAL ACCESS GRANTED // CORE_SYSTEM_READY${PLAIN}"
-            echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
-            echo -e "  ${BLUE}🔹 USERNAME    :${PLAIN} ${BOLD}${YELLOW}${config_username}${PLAIN}"
-            echo -e "  ${BLUE}🔹 PASSWORD    :${PLAIN} ${BOLD}${YELLOW}${config_password}${PLAIN}"
-            echo -e "  ${BLUE}🔹 ACCESS PORT :${PLAIN} ${BOLD}${YELLOW}${config_port}${PLAIN}"
-            echo -e "  ${BLUE}🔹 WEB PATH    :${PLAIN} ${BOLD}${YELLOW}/${config_webBasePath}${PLAIN}"
-            echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
-            echo ""
-            echo -e "  ${BOLD}${PURPLE}🌐 SECURE ACCESS URL:${PLAIN}"
-            echo -e "  ${BOLD}${BLUE}https://${SSL_HOST}:${config_port}/${config_webBasePath}${PLAIN}"
-            echo ""
-            echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
-            echo -e "  ${RED}⚠️  CRITICAL:${PLAIN} ${WHITE}SAVE THESE CREDENTIALS SECURELY!${PLAIN}"
-            echo -e "  ${GREEN}🛡️  SECURITY:${PLAIN} ${WHITE}SSL CERTIFICATE ACTIVE & ENFORCED${PLAIN}"
-            echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
+            echo -e "${green}═══════════════════════════════════════════${plain}"
+            echo -e "${green}     Panel Installation Complete!         ${plain}"
+            echo -e "${green}═══════════════════════════════════════════${plain}"
+            echo -e "${green}Username:    ${config_username}${plain}"
+            echo -e "${green}Password:    ${config_password}${plain}"
+            echo -e "${green}Port:        ${config_port}${plain}"
+            echo -e "${green}WebBasePath: ${config_webBasePath}${plain}"
+            echo -e "${green}Access URL:  https://${SSL_HOST}:${config_port}/${config_webBasePath}${plain}"
+            echo -e "${green}═══════════════════════════════════════════${plain}"
+            echo -e "${yellow}⚠ IMPORTANT: Save these credentials securely!${plain}"
+            echo -e "${yellow}⚠ SSL Certificate: Enabled and configured${plain}"
         else
             local config_webBasePath=$(gen_random_string 18)
             echo -e "${yellow}WebBasePath is missing or too short. Generating a new one...${plain}"
@@ -750,17 +748,10 @@ config_after_install() {
             # If the panel is already installed but no certificate is configured, prompt for SSL now
             if [[ -z "${existing_cert}" ]]; then
                 echo ""
-                # --- SSL Quantum Shield UI ---
-                echo -e "${CYAN}📡 // INITIALIZING_SECURITY_HANDSHAKE...${PLAIN}"
-                echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
-                echo -e "${CYAN}┃${PLAIN}  ${BOLD}${PURPLE}🛡️  SSL CRYPTO-SHIELD DEPLOYMENT${PLAIN}                 ${CYAN}┃${PLAIN}"
-                echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
-                echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-                echo -e "${CYAN}┃${PLAIN}  ${GREEN}✦ RECOMMENDED :${PLAIN} ${WHITE}ENHANCED MATRIX PROTECTION${PLAIN}    ${CYAN}┃${PLAIN}"
-                echo -e "${CYAN}┃${PLAIN}  ${YELLOW}✦ INFO        :${PLAIN} ${WHITE}SUPPORTED: DOMAIN & IP ADDR${PLAIN}   ${CYAN}┃${PLAIN}"
-                echo -e "${CYAN}┃${PLAIN}  ${BLUE}✦ AUTHORITY   :${PLAIN} ${WHITE}LET'S ENCRYPT CA${PLAIN}              ${CYAN}┃${PLAIN}"
-                echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-                echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
+                echo -e "${green}═══════════════════════════════════════════${plain}"
+                echo -e "${green}     SSL Certificate Setup (RECOMMENDED)   ${plain}"
+                echo -e "${green}═══════════════════════════════════════════${plain}"
+                echo -e "${yellow}Let's Encrypt now supports both domains and IP addresses!${plain}"
                 echo ""
                 prompt_and_setup_ssl "${existing_port}" "${config_webBasePath}" "${server_ip}"
                 echo -e "${green}Access URL:  https://${SSL_HOST}:${existing_port}/${config_webBasePath}${plain}"
@@ -776,11 +767,17 @@ config_after_install() {
             
             echo -e "${yellow}Default credentials detected. Security update required...${plain}"
             ${xui_folder}/x-ui setting -username "${config_username}" -password "${config_password}"
-            echo -e "Generated new random login credentials:"
-            echo -e "###############################################"
-            echo -e "${green}Username: ${config_username}${plain}"
-            echo -e "${green}Password: ${config_password}${plain}"
-            echo -e "###############################################"
+            echo -e "${green}═══════════════════════════════════════════${plain}"
+            echo -e "${green}     Panel Installation Complete!         ${plain}"
+            echo -e "${green}═══════════════════════════════════════════${plain}"
+            echo -e "${green}Username:    ${config_username}${plain}"
+            echo -e "${green}Password:    ${config_password}${plain}"
+            echo -e "${green}Port:        ${config_port}${plain}"
+            echo -e "${green}WebBasePath: ${config_webBasePath}${plain}"
+            echo -e "${green}Access URL:  https://${SSL_HOST}:${config_port}/${config_webBasePath}${plain}"
+            echo -e "${green}═══════════════════════════════════════════${plain}"
+            echo -e "${yellow}⚠️ IMPORTANT: Save these credentials securely!${plain}"
+            echo -e "${yellow}⚠️ SSL Certificate: Enabled and configured${plain}"
         else
             echo -e "${green}Username, Password, and WebBasePath are properly set.${plain}"
         fi
@@ -790,16 +787,9 @@ config_after_install() {
         existing_cert=$(${xui_folder}/x-ui setting -getCert true | grep 'cert:' | awk -F': ' '{print $2}' | tr -d '[:space:]')
         if [[ -z "$existing_cert" ]]; then
             echo ""
-            echo -e "${CYAN}📡 // NEURAL_SECURITY_PROTOCOL_DETECTION...${PLAIN}"
-            echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
-            echo -e "${CYAN}┃${PLAIN}  ${BOLD}${PURPLE}🛡️  SSL CRYPTO-SHIELD DEPLOYMENT${PLAIN}                 ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
-            echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}┃${PLAIN}  ${GREEN}✦ STATUS      :${PLAIN} ${WHITE}ENCRYPTION RECOMMENDED${PLAIN}        ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}┃${PLAIN}  ${BLUE}✦ PROTECTION  :${PLAIN} ${WHITE}End-to-End Neural Tunneling${PLAIN}   ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}┃${PLAIN}  ${YELLOW}✦ VALIDATION  :${PLAIN} ${WHITE}Multi-Domain & IP Support${PLAIN}     ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-            echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
+            echo -e "${green}═══════════════════════════════════════════${plain}"
+            echo -e "${green}     SSL Certificate Setup (RECOMMENDED)   ${plain}"
+            echo -e "${green}═══════════════════════════════════════════${plain}"
             echo -e "${yellow}Let's Encrypt now supports both domains and IP addresses!${plain}"
             echo ""
             prompt_and_setup_ssl "${existing_port}" "${existing_webBasePath}" "${server_ip}"
@@ -838,7 +828,7 @@ install_x-ui() {
         min_version="2.3.5"
         
         if [[ "$(printf '%s\n' "$min_version" "$tag_version_numeric" | sort -V | head -n1)" != "$min_version" ]]; then
-            
+            echo -e "${red}Please use a newer version (at least v2.3.5). Exiting installation.${plain}"
             exit 1
         fi
         
@@ -1012,7 +1002,7 @@ install_x-ui() {
     echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui install${plain}  ${WHITE}▸ Core Installation${plain}             ${CYAN}┃${PLAIN}"
     echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui uninstall${plain}${WHITE}▸ Purge System Files${plain}            ${CYAN}┃${PLAIN}"
     echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
+    echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
 }
 
 echo -e "${green}Running...${plain}"
