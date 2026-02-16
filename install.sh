@@ -35,14 +35,65 @@ sleep 1
 # --- Password Lock ပြီးဆုံးခြင်း ---
 #!/bin/bash
 
-
-#!/bin/bash
-
-red='\033[0;31m'
+# --- Colors ---
+cyan='\033[0;36m'
 green='\033[0;32m'
 blue='\033[0;34m'
 yellow='\033[0;33m'
+red='\033[0;31m'
+purple='\033[0;35m'
 plain='\033[0m'
+bold='\033[1m'
+
+# --- Advanced Variables ---
+IP=$(curl -s https://api.ipify.org)
+REGION=$(curl -s ipapi.co/$IP/country_name/)
+CITY=$(curl -s ipapi.co/$IP/city/)
+ISP=$(curl -s ipapi.co/$IP/org/)
+OS=$(cat /etc/os-release | grep -w "PRETTY_NAME" | cut -d '"' -f2)
+UPTIME=$(uptime -p | sed 's/up //')
+RAM_TOTAL=$(free -m | awk '/Mem:/ {print $2}')
+RAM_USED=$(free -m | awk '/Mem:/ {print $3}')
+RAM_PERCENT=$(awk "BEGIN {printf \"%.2f\", $RAM_USED*100/$RAM_TOTAL}")
+CPU_MODEL=$(lscpu | grep "Model name" | cut -d ':' -f2 | sed 's/^[ \t]*//')
+CPU_CORES=$(nproc)
+DISK_USAGE=$(df -h / | awk 'NR==2 {print $3 "/" $2 " (" $5 ")"}')
+VIRTUAL=$(systemd-detect-virt)
+
+clear
+echo -e "${cyan}📡 // SCANNING SYSTEM ARCHITECTURE...${plain}"
+sleep 1
+
+echo -e "${cyan}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${plain}"
+echo -e "${cyan}┃${plain}  ${bold}${purple}🖥️  ULTIMATE VPS NEURAL DASHBOARD${plain}                     ${cyan}┃${plain}"
+echo -e "${cyan}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
+echo -e "${cyan}┃${plain}  ${bold}${white}[ NETWORK IDENTITY ]${plain}                                   ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}▸ IP ADDRESS  :${plain} ${bold}${yellow}$IP${plain}"
+echo -e "${cyan}┃${plain}  ${blue}▸ PROVIDER    :${plain} ${white}$ISP${plain}"
+echo -e "${cyan}┃${plain}  ${blue}▸ GEO_LOC     :${plain} ${white}$CITY, $REGION${plain}"
+echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${bold}${white}[ CORE SPECIFICATIONS ]${plain}                                ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}▸ PROCESSOR   :${plain} ${white}$CPU_MODEL ($CPU_CORES Cores)${plain}"
+echo -e "${cyan}┃${plain}  ${blue}▸ VIRT_TYPE   :${plain} ${magenta}${VIRTUAL^^}${plain}"
+echo -e "${cyan}┃${plain}  ${blue}▸ OS_RELEASE  :${plain} ${white}$OS${plain}"
+echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${bold}${white}[ RESOURCE UTILIZATION ]${plain}                               ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}▸ UPTIME      :${plain} ${green}$UPTIME${plain}"
+echo -e "${cyan}┃${plain}  ${blue}▸ RAM_LOAD    :${plain} ${white}$RAM_USED/${RAM_TOTAL}MB ($RAM_PERCENT%)${plain}"
+echo -e "${cyan}┃${plain}  ${blue}▸ DISK_SPACE  :${plain} ${white}$DISK_USAGE${plain}"
+echo -e "${cyan}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${plain}"
+
+echo -e "\n${yellow}⚡ INITIATING NETWORK VELOCITY TEST...${plain}"
+# Speedtest using a 10MB test file
+DOWNLOAD_SPEED=$(curl -s -o /dev/null -w "%{speed_download}\n" http://speedtest.tele2.net/10MB.zip | awk '{printf "%.2f Mbps\n", $1/125000}')
+
+echo -e "${green}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${plain}"
+echo -e "${green}┃${plain}  ${bold}🚀 SPEEDTEST ANALYTICS${plain}                              ${green}┃${plain}"
+echo -e "${green}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
+echo -e "${green}┃${plain}  ${white}DOWNLOAD SPEED :${plain} ${bold}${cyan}$DOWNLOAD_SPEED${plain}"
+echo -e "${green}┃${plain}  ${white}NETWORK STATUS :${plain} ${bold}${green}STABLE / OPTIMIZED${plain}"
+echo -e "${green}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${plain}"
+echo ""
 
 cur_dir=$(pwd)
 
@@ -1042,39 +1093,6 @@ install_x-ui() {
     echo -e "${PURPLE}  [!] ACCESS_TOKEN: GRANTED  [!] READY_FOR_COMMAND_INPUT...${PLAIN}"
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
 }
-#!/bin/bash
-
-# --- Colors ---
-
-# --- Advanced Variables ---
-IP=$(curl -s https://api.ipify.org)
-REGION=$(curl -s ipapi.co/$IP/country_name/)
-CITY=$(curl -s ipapi.co/$IP/city/)
-ISP=$(curl -s ipapi.co/$IP/org/)
-OS=$(cat /etc/os-release | grep -w "PRETTY_NAME" | cut -d '"' -f2)
-UPTIME=$(uptime -p | sed 's/up //')
-RAM_TOTAL=$(free -m | awk '/Mem:/ {print $2}')
-RAM_USED=$(free -m | awk '/Mem:/ {print $3}')
-RAM_PERCENT=$(awk "BEGIN {printf \"%.2f\", $RAM_USED*100/$RAM_TOTAL}")
-CPU_MODEL=$(lscpu | grep "Model name" | cut -d ':' -f2 | sed 's/^[ \t]*//')
-CPU_CORES=$(nproc)
-DISK_USAGE=$(df -h / | awk 'NR==2 {print $3 "/" $2 " (" $5 ")"}')
-VIRTUAL=$(systemd-detect-virt)
-
-clear
-echo -e "${cyan}📡 // SCANNING SYSTEM ARCHITECTURE...${plain}"
-sleep 1
-
-echo -e "${cyan}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${plain}"
-echo -e "${cyan}┃${plain}  ${bold}${purple}🖥️  ULTIMATE VPS NEURAL DASHBOARD${plain}                     ${cyan}┃${plain}"
-echo -e "${cyan}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
-echo -e "${cyan}┃${plain}  ${bold}${white}[ NETWORK IDENTITY ]${plain}                                   ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${blue}▸ IP ADDRESS  :${plain} ${bold}${yellow}$IP${plain}"
-echo -e "${cyan}┃${plain}  ${blue}▸ PROVIDER    :${plain} ${white}$ISP${plain}"
-echo -e "${cyan}┃${plain}  ${blue}▸ GEO_LOC     :${plain} ${white}$CITY, $REGION${plain}"
-echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain}  ${bold}${white}[ CORE SPECIFICATIONS ]${plain}                                ${cyan}┃${plain}"
-echo -e "${cyan}┃${plain
 echo -e "${green}Running...${plain}"
 install_base
 install_x-ui $1
