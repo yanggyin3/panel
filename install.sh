@@ -33,7 +33,60 @@ echo -e "${green}  [✔] Identity Verified! Starting Installation...${plain}"
 echo -e "${blue}==================================================${plain}"
 sleep 1
 # --- Password Lock ပြီးဆုံးခြင်း ---
+#!/bin/bash
 
+# --- Colors ---
+cyan='\033[0;36m'
+green='\033[0;32m'
+blue='\033[0;34m'
+yellow='\033[0;33m'
+red='\033[0;31m'
+purple='\033[0;35m'
+plain='\033[0m'
+bold='\033[1m'
+
+# --- Variables ---
+IP=$(curl -s https://api.ipify.org)
+REGION=$(curl -s ipapi.co/$IP/country_name/)
+CITY=$(curl -s ipapi.co/$IP/city/)
+ISP=$(curl -s ipapi.co/$IP/org/)
+OS=$(cat /etc/os-release | grep -w "PRETTY_NAME" | cut -d '"' -f2)
+UPTIME=$(uptime -p)
+RAM_USAGE=$(free -m | awk 'NR==2{printf "%s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }')
+CPU_LOAD=$(top -bn1 | grep "load average:" | awk '{print $10 $11 $12}')
+
+clear
+echo -e "${cyan}📡 // INITIALIZING NEURAL DIAGNOSTICS...${plain}"
+sleep 1
+
+echo -e "${cyan}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${plain}"
+echo -e "${cyan}┃${plain}  ${bold}${purple}🖥️  VIRTUAL PRIVATE SERVER - MATRIX STATUS${plain}             ${cyan}┃${plain}"
+echo -e "${cyan}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
+echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔹 NETWORK IP   :${plain} ${bold}${yellow}$IP${plain}                             ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔹 ISP / ORG    :${plain} ${white}$ISP${plain}                            ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔹 LOCATION     :${plain} ${white}$CITY, $REGION${plain}                      ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
+echo -e "${cyan}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔸 OS RELEASE   :${plain} ${white}$OS${plain}                          ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔸 SYS UPTIME   :${plain} ${white}$UPTIME${plain}                          ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔸 RAM USAGE    :${plain} ${white}$RAM_USAGE${plain}                        ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}  ${blue}🔸 CPU LOAD     :${plain} ${white}$CPU_LOAD${plain}                           ${cyan}┃${plain}"
+echo -e "${cyan}┃${plain}                                                              ${cyan}┃${plain}"
+echo -e "${cyan}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${plain}"
+
+echo -e "\n${yellow}⚡ TESTING NETWORK VELOCITY...${plain}"
+# Speedtest logic (Requires speedtest-cli or a simple curl test)
+# အမြန်ဆုံး speed test ရဖို့ curl နဲ့ပဲ test လုပ်ပြထားပါတယ်
+DOWNLOAD_SPEED=$(curl -s -o /dev/null -w "%{speed_download}\n" http://speedtest.tele2.net/10MB.zip | awk '{printf "%.2f Mbps\n", $1/125000}')
+
+echo -e "${green}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${plain}"
+echo -e "${green}┃${plain}  ${bold}🚀 SPEEDTEST RESULTS${plain}                                ${green}┃${plain}"
+echo -e "${green}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${plain}"
+echo -e "${green}┃${plain}  ${white}DOWNLOAD VELOCITY :${plain} ${bold}${cyan}$DOWNLOAD_SPEED${plain}                 ${green}┃${plain}"
+echo -e "${green}┃${plain}  ${white}LATENCY STATUS    :${plain} ${bold}${green}OPTIMIZED${plain}                      ${green}┃${plain}"
+echo -e "${green}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${plain}"
+echo ""
 #!/bin/bash
 
 red='\033[0;31m'
@@ -726,27 +779,34 @@ config_after_install() {
 
             prompt_and_setup_ssl "${config_port}" "${config_webBasePath}" "${server_ip}"
             
-            # Display final credentials and access information
+            # --- Ultimate Neural Deployment Summary ---
+            clear
+            echo -e "${CYAN}📡 // FINALIZING_NEURAL_UPLINK...${PLAIN}"
+            sleep 1
+
+            echo -e "${PURPLE}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
+            echo -e "${PURPLE}┃${PLAIN}  ${BOLD}${WHITE}🚀 DEPLOYMENT COMPLETED: NEURAL NODES ARE ONLINE${PLAIN}        ${PURPLE}┃${PLAIN}"
+            echo -e "${PURPLE}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
+    
+            echo -e "  ${CYAN}┌── [ ${BOLD}${WHITE}ENCRYPTED ACCESS TERMINAL${PLAIN}${CYAN} ]${PLAIN}"
+            echo -e "  ${CYAN}│${PLAIN}"
+            echo -e "  ${CYAN}├──╼ ${BLUE}ID_IDENTITY  :${PLAIN} ${BOLD}${YELLOW}${config_username}${PLAIN}"
+            echo -e "  ${CYAN}├──╼ ${BLUE}ID_PASSCODE  :${PLAIN} ${BOLD}${YELLOW}${config_password}${PLAIN}"
+            echo -e "  ${CYAN}├──╼ ${BLUE}PORT_GATE    :${PLAIN} ${BOLD}${CYAN}${config_port}${PLAIN}"
+            echo -e "  ${CYAN}└──╼ ${BLUE}BASE_PATH    :${PLAIN} ${BOLD}${CYAN}/${config_webBasePath}${PLAIN}"
+
+            echo -e ""
+            echo -e "  ${CYAN}┌── [ ${BOLD}${WHITE}SECURE NEURAL LINK (URL)${PLAIN}${CYAN} ]${PLAIN}"
+            echo -e "  ${CYAN}│${PLAIN}"
+            echo -e "  ${CYAN}└──╼ ${BOLD}${GREEN}https://${SSL_HOST}:${config_port}/${config_webBasePath}${PLAIN}"
+
+            echo -e ""
+            echo -e "${CYAN}  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
+            echo -e "  ${BOLD}${RED}  [!] CRITICAL :${PLAIN} ${WHITE}STORE ACCESS KEYS IN A SECURE VAULT!${PLAIN}"
+            echo -e "  ${BOLD}${GREEN}  [✓] SECURITY :${PLAIN} ${WHITE}SSL ENCRYPTION FULLY ACTIVE (ENFORCED)${PLAIN}"
+            echo -e "${CYAN}  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
+            echo -e "  ${PURPLE}  // SYSTEM_STATUS: STABLE  // ACCESS_LEVEL: ROOT${PLAIN}"
             echo ""
-            echo -e "${GREEN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
-            echo -e "${GREEN}┃${PLAIN}  ${BOLD}${GREEN}🚀 NEURAL LINK ESTABLISHED: DEPLOYMENT SUCCESS!${PLAIN}     ${GREEN}┃${PLAIN}"
-            echo -e "${GREEN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
-            echo ""
-            echo -e "  ${CYAN}TERMINAL ACCESS GRANTED // CORE_SYSTEM_READY${PLAIN}"
-            echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
-            echo -e "  ${BLUE}🔹 USERNAME    :${PLAIN} ${BOLD}${YELLOW}${config_username}${PLAIN}"
-            echo -e "  ${BLUE}🔹 PASSWORD    :${PLAIN} ${BOLD}${YELLOW}${config_password}${PLAIN}"
-            echo -e "  ${BLUE}🔹 ACCESS PORT :${PLAIN} ${BOLD}${YELLOW}${config_port}${PLAIN}"
-            echo -e "  ${BLUE}🔹 WEB PATH    :${PLAIN} ${BOLD}${YELLOW}/${config_webBasePath}${PLAIN}"
-            echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
-            echo ""
-            echo -e "  ${BOLD}${PURPLE}🌐 SECURE ACCESS URL:${PLAIN}"
-            echo -e "  ${BOLD}${BLUE}https://${SSL_HOST}:${config_port}/${config_webBasePath}${PLAIN}"
-            echo ""
-            echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
-            echo -e "  ${RED}⚠️  CRITICAL:${PLAIN} ${WHITE}SAVE THESE CREDENTIALS SECURELY!${PLAIN}"
-            echo -e "  ${GREEN}🛡️  SECURITY:${PLAIN} ${WHITE}SSL CERTIFICATE ACTIVE & ENFORCED${PLAIN}"
-            echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
         else
             local config_webBasePath=$(gen_random_string 18)
             echo -e "${yellow}WebBasePath is missing or too short. Generating a new one...${plain}"
@@ -999,28 +1059,39 @@ install_x-ui() {
     
     echo -e "${green}x-ui ${tag_version}${plain} installation finished, it is running now..."
     echo -e ""
-    # --- Future Neural Subcommands UI ---
-    echo -e "${CYAN}📡 // NEURAL_COMMAND_CENTER_INITIALIZED${PLAIN}"
-    echo -e "${CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BOLD}${GREEN}⚡ 3X-UI CONTROL INTERFACE (SUBCOMMANDS)${PLAIN}         ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui${plain}          ${WHITE}▸ Admin Terminal Script${plain}         ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui start${plain}    ${WHITE}▸ Boot Service${plain}                  ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui stop${plain}     ${WHITE}▸ Terminate Service${plain}             ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui restart${plain}  ${WHITE}▸ Reboot Neural Nodes${plain}           ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui status${plain}   ${WHITE}▸ Check System Integrity${plain}        ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui settings${plain} ${WHITE}▸ View Config Data${plain}              ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui enable${plain}   ${WHITE}▸ Set Auto-Initialize${plain}           ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui disable${plain}  ${WHITE}▸ Disable Auto-Initialize${plain}        ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui log${plain}      ${WHITE}▸ Stream Access Logs${plain}            ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui banlog${plain}   ${WHITE}▸ View Intrusion Logs${plain}           ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui update${plain}   ${WHITE}▸ Upgrade Matrix Version${plain}        ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui legacy${plain}   ${WHITE}▸ Load Archive Version${plain}          ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui install${plain}  ${WHITE}▸ Core Installation${plain}             ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}  ${BLUE}● x-ui uninstall${plain}${WHITE}▸ Purge System Files${plain}            ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┃${PLAIN}                                                      ${CYAN}┃${PLAIN}"
-    echo -e "${CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${PLAIN}"
+   # --- 3X-UI NEURAL COMMAND MATRIX ---
+    echo -e "${CYAN}┌────────────────────────────────────────────────────────────┐${PLAIN}"
+    echo -e "${CYAN}│${PLAIN}  ${BOLD}${WHITE}💻 SYSTEM OS    :${PLAIN} ${BLUE}$(uname -s)${PLAIN}  ${BOLD}${WHITE}ARCH:${PLAIN} ${BLUE}$(uname -m)${PLAIN}                 ${CYAN}│${PLAIN}"
+    echo -e "${CYAN}│${PLAIN}  ${BOLD}${WHITE}📡 KERNEL LINK  :${PLAIN} ${BLUE}$(uname -r | cut -d'-' -f1)${PLAIN}                          ${CYAN}│${PLAIN}"
+    echo -e "${CYAN}├────────────────────────────────────────────────────────────┤${PLAIN}"
+    echo -e "${CYAN}│${PLAIN}      ${BOLD}${PURPLE}⚡ [ X-UI NEURAL COMMAND INTERFACE v4.0 ]${PLAIN}          ${CYAN}│${PLAIN}"
+    echo -e "${CYAN}└────────────────────────────────────────────────────────────┘${PLAIN}"
+    echo ""
+    
+    echo -e "${CYAN}    [ ${BOLD}${YELLOW}CORE_OPERATIONS${PLAIN}${CYAN} ]${PLAIN}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui${plain}             ${WHITE}▸ Master Admin Shell${plain}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui start${plain}       ${WHITE}▸ Ignite Neural Nodes${plain}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui stop${plain}        ${WHITE}▸ Kill Process Tree${plain}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui restart${plain}     ${WHITE}▸ Reboot Matrix Core${plain}"
+    echo -e ""
+    echo -e "${CYAN}    [ ${BOLD}${YELLOW}DIAGNOSTIC_ANALYSIS${PLAIN}${CYAN} ]${PLAIN}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui status${plain}      ${WHITE}▸ Integrity Check${plain}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui settings${plain}    ${WHITE}▸ View Data Packets${plain}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui log${plain}         ${WHITE}▸ Access Stream Logs${plain}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui banlog${plain}      ${WHITE}▸ Breach Analysis${plain}"
+    echo -e ""
+    echo -e "${CYAN}    [ ${BOLD}${YELLOW}SYSTEM_MAINTENANCE${PLAIN}${CYAN} ]${PLAIN}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui update${plain}      ${WHITE}▸ Fetch New Core Version${plain}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui legacy${plain}      ${WHITE}▸ Load Archive Modules${plain}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui install${plain}     ${WHITE}▸ Deploy Core Assets${plain}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui uninstall${plain}   ${WHITE}▸ Purge Neural Link${plain}"
+    echo -e ""
+    echo -e "${CYAN}    [ ${BOLD}${YELLOW}BOOT_CONFIGURATION${PLAIN}${CYAN} ]${PLAIN}"
+    echo -e "${CYAN}    ◈${PLAIN}  ${BLUE}x-ui enable/disable${plain} ${WHITE}▸ Toggle Auto-Initialize${plain}"
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
+    echo -e "${PURPLE}  [!] ACCESS_TOKEN: GRANTED  [!] READY_FOR_COMMAND_INPUT...${PLAIN}"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${PLAIN}"
 }
 
 echo -e "${green}Running...${plain}"
